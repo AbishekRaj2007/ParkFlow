@@ -6,35 +6,68 @@ import { AreaInfoCard } from './components/AreaInfoCard';
 import { RevenueChart } from './components/RevenueChart';
 import { UtilizationChart } from './components/UtilizationChart';
 import { MapView } from './components/MapView';
+import { ClientDashboard } from './components/ClientDashboard';
 import { Eye, Calendar, LogIn, CircleDot } from 'lucide-react';
 
+type UserRole = 'admin' | 'client';
+
 export default function App() {
+  const [userRole, setUserRole] = useState<UserRole>('admin');
   const [activePage, setActivePage] = useState('Dashboard');
+
+  const handleSwitchToClient = () => {
+    setUserRole('client');
+    setActivePage('Dashboard');
+  };
+
+  const handleSwitchToAdmin = () => {
+    setUserRole('admin');
+    setActivePage('Dashboard');
+  };
+
+  const handleLogout = () => {
+    // For now, just reset to admin view
+    // In a real app, this would clear auth tokens and redirect to login
+    setUserRole('admin');
+    setActivePage('Dashboard');
+    alert('Logged out successfully!');
+  };
+
+  // If user is client, show client dashboard
+  if (userRole === 'client') {
+    return (
+      <ClientDashboard 
+        onSwitchToAdmin={handleSwitchToAdmin}
+        onLogout={handleLogout}
+      />
+    );
+  }
+
   const stats = [
     {
       icon: Eye,
-      value: '2,847',
+      value: '0',
       label: 'Total Parking Views',
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
     },
     {
       icon: Calendar,
-      value: '1,234',
+      value: '0',
       label: 'Total Bookings',
       color: 'text-green-600',
       bgColor: 'bg-green-50',
     },
     {
       icon: LogIn,
-      value: '89',
+      value: '0',
       label: 'Check-ins Today',
       color: 'text-purple-600',
       bgColor: 'bg-purple-50',
     },
     {
       icon: CircleDot,
-      value: '156',
+      value: '0',
       label: 'Active Slots',
       color: 'text-orange-600',
       bgColor: 'bg-orange-50',
@@ -42,22 +75,22 @@ export default function App() {
   ];
 
   const parkingDetails = {
-    totalSlots: 250,
-    availableSlots: 156,
-    reservedSlots: 67,
-    occupiedSlots: 27,
+    totalSlots: 0,
+    availableSlots: 0,
+    reservedSlots: 0,
+    occupiedSlots: 0,
     vehicleTypes: [
-      { type: 'Sedan', count: 45 },
-      { type: 'SUV', count: 32 },
-      { type: 'Motorcycle', count: 18 },
-      { type: 'Truck', count: 12 },
+      { type: 'Sedan', count: 0 },
+      { type: 'SUV', count: 0 },
+      { type: 'Motorcycle', count: 0 },
+      { type: 'Truck', count: 0 },
     ],
   };
 
   const finesSummary = [
-    { violation: 'Overtime Parking', count: 12, amount: '₹4,800' },
-    { violation: 'Unauthorized Access', count: 5, amount: '₹3,500' },
-    { violation: 'Wrong Slot Parking', count: 8, amount: '₹2,400' },
+    { violation: 'Overtime Parking', count: 0, amount: '₹0' },
+    { violation: 'Unauthorized Access', count: 0, amount: '₹0' },
+    { violation: 'Wrong Slot Parking', count: 0, amount: '₹0' },
   ];
 
   const renderPage = () => {
@@ -141,7 +174,7 @@ export default function App() {
                   </div>
                   <div className="mt-4 pt-4 border-t flex items-center justify-between">
                     <span className="text-sm font-medium text-gray-700">Total Fines</span>
-                    <span className="text-lg font-bold text-gray-900">₹10,700</span>
+                    <span className="text-lg font-bold text-gray-900">₹0</span>
                   </div>
                 </div>
               </div>
@@ -170,8 +203,8 @@ export default function App() {
                         <h4 className="font-semibold text-gray-900">Connaught Place Central Parking</h4>
                         <p className="text-sm text-gray-600 mt-1">Block A, Connaught Place, New Delhi</p>
                         <div className="flex gap-4 mt-2">
-                          <span className="text-sm text-green-600">156 Available</span>
-                          <span className="text-sm text-gray-600">250 Total</span>
+                          <span className="text-sm text-green-600">0 Available</span>
+                          <span className="text-sm text-gray-600">0 Total</span>
                         </div>
                       </div>
                       <span className="text-sm font-medium text-blue-600">Active</span>
@@ -183,8 +216,8 @@ export default function App() {
                         <h4 className="font-semibold text-gray-900">Bandra West Parking Hub</h4>
                         <p className="text-sm text-gray-600 mt-1">Linking Road, Bandra West, Mumbai</p>
                         <div className="flex gap-4 mt-2">
-                          <span className="text-sm text-green-600">89 Available</span>
-                          <span className="text-sm text-gray-600">180 Total</span>
+                          <span className="text-sm text-green-600">0 Available</span>
+                          <span className="text-sm text-gray-600">0 Total</span>
                         </div>
                       </div>
                       <span className="text-sm font-medium text-blue-600">Active</span>
@@ -196,8 +229,8 @@ export default function App() {
                         <h4 className="font-semibold text-gray-900">Koramangala Parking Zone</h4>
                         <p className="text-sm text-gray-600 mt-1">5th Block, Koramangala, Bangalore</p>
                         <div className="flex gap-4 mt-2">
-                          <span className="text-sm text-green-600">45 Available</span>
-                          <span className="text-sm text-gray-600">120 Total</span>
+                          <span className="text-sm text-green-600">0 Available</span>
+                          <span className="text-sm text-gray-600">0 Total</span>
                         </div>
                       </div>
                       <span className="text-sm font-medium text-blue-600">Active</span>
@@ -287,7 +320,7 @@ export default function App() {
                   </div>
                   <div className="ml-auto text-right">
                     <div className="text-sm text-gray-600">Total Bookings</div>
-                    <div className="font-semibold">24</div>
+                    <div className="font-semibold">0</div>
                   </div>
                 </div>
               </div>
@@ -302,7 +335,7 @@ export default function App() {
                   </div>
                   <div className="ml-auto text-right">
                     <div className="text-sm text-gray-600">Total Bookings</div>
-                    <div className="font-semibold">18</div>
+                    <div className="font-semibold">0</div>
                   </div>
                 </div>
               </div>
@@ -328,7 +361,7 @@ export default function App() {
                     </div>
                     <div className="text-right">
                       <div className="text-sm text-gray-600">Total Revenue</div>
-                      <div className="text-lg font-bold text-green-600">₹2,45,000</div>
+                      <div className="text-lg font-bold text-green-600">₹0</div>
                     </div>
                   </div>
                 </div>
@@ -344,15 +377,15 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <div className="text-sm text-gray-600 mb-2">Peak Hour</div>
-                <div className="text-2xl font-bold">6:00 PM - 8:00 PM</div>
+                <div className="text-2xl font-bold">--</div>
               </div>
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <div className="text-sm text-gray-600 mb-2">Avg. Duration</div>
-                <div className="text-2xl font-bold">2.5 Hours</div>
+                <div className="text-2xl font-bold">0 Hours</div>
               </div>
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <div className="text-sm text-gray-600 mb-2">Occupancy Rate</div>
-                <div className="text-2xl font-bold text-green-600">78%</div>
+                <div className="text-2xl font-bold text-green-600">0%</div>
               </div>
             </div>
           </div>
@@ -421,7 +454,11 @@ export default function App() {
       <Sidebar activePage={activePage} onNavigate={setActivePage} />
       
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Topbar activePage={activePage} />
+        <Topbar 
+          activePage={activePage} 
+          onSwitchToClient={handleSwitchToClient}
+          onLogout={handleLogout}
+        />
         
         <main className="flex-1 overflow-y-auto p-6">
           {renderPage()}

@@ -2,35 +2,35 @@ import React, { useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 const weekData = [
-  { day: 'Mon', revenue: 4500 },
-  { day: 'Tue', revenue: 5200 },
-  { day: 'Wed', revenue: 3800 },
-  { day: 'Thu', revenue: 5900 },
-  { day: 'Fri', revenue: 6800 },
-  { day: 'Sat', revenue: 7200 },
-  { day: 'Sun', revenue: 6400 },
+  { day: 'Mon', revenue: 0 },
+  { day: 'Tue', revenue: 0 },
+  { day: 'Wed', revenue: 0 },
+  { day: 'Thu', revenue: 0 },
+  { day: 'Fri', revenue: 0 },
+  { day: 'Sat', revenue: 0 },
+  { day: 'Sun', revenue: 0 },
 ];
 
 const monthData = [
-  { day: 'Week 1', revenue: 28500 },
-  { day: 'Week 2', revenue: 32000 },
-  { day: 'Week 3', revenue: 29000 },
-  { day: 'Week 4', revenue: 35000 },
+  { day: 'Week 1', revenue: 0 },
+  { day: 'Week 2', revenue: 0 },
+  { day: 'Week 3', revenue: 0 },
+  { day: 'Week 4', revenue: 0 },
 ];
 
 const yearData = [
-  { day: 'Jan', revenue: 125000 },
-  { day: 'Feb', revenue: 118000 },
-  { day: 'Mar', revenue: 132000 },
-  { day: 'Apr', revenue: 145000 },
-  { day: 'May', revenue: 152000 },
-  { day: 'Jun', revenue: 168000 },
-  { day: 'Jul', revenue: 175000 },
-  { day: 'Aug', revenue: 162000 },
-  { day: 'Sep', revenue: 158000 },
-  { day: 'Oct', revenue: 149000 },
-  { day: 'Nov', revenue: 135000 },
-  { day: 'Dec', revenue: 142000 },
+  { day: 'Jan', revenue: 0 },
+  { day: 'Feb', revenue: 0 },
+  { day: 'Mar', revenue: 0 },
+  { day: 'Apr', revenue: 0 },
+  { day: 'May', revenue: 0 },
+  { day: 'Jun', revenue: 0 },
+  { day: 'Jul', revenue: 0 },
+  { day: 'Aug', revenue: 0 },
+  { day: 'Sep', revenue: 0 },
+  { day: 'Oct', revenue: 0 },
+  { day: 'Nov', revenue: 0 },
+  { day: 'Dec', revenue: 0 },
 ];
 
 type TimeRange = 'week' | 'month' | 'year';
