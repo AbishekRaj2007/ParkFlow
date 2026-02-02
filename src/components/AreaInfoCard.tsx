@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapPin, User } from 'lucide-react';
 import { StatusBadge } from './StatusBadge';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from './ImageWithFallback';
 
 export function AreaInfoCard() {
   return (
